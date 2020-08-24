@@ -7,8 +7,7 @@ import {
     ScrollView,
     Platform,
     TextInput,
-    FlatList,
-    ViewPropTypes
+    FlatList
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -208,9 +207,9 @@ class DropDownPicker extends React.Component {
 
     render() {
         const { multiple, disabled } = this.state.props;
-        const { placeholder, scrollViewProps } = this.props;
+        const { placeholder } = this.props;
         const isPlaceholderActive = this.state.choice.label === null;
-        const label = isPlaceholderActive ? (placeholder) : this.state.choice.label.substr(0, this.props.selectedLabelLength);
+        const label = isPlaceholderActive ? (placeholder) : this.state.choice.label;
         const placeholderStyle = isPlaceholderActive && this.props.placeholderStyle;
         const opacity = disabled ? 0.5 : 1;
         const items = this.getItems();
@@ -231,9 +230,9 @@ class DropDownPicker extends React.Component {
                     style={[
                         styles.dropDown,
                         this.props.style,
-                        this.state.isVisible && styles.noBottomRadius, {
-                            flexDirection: 'row', flex: 1
-                        }
+                        // this.state.isVisible && styles.noBottomRadius, {
+                        //     flexDirection: 'row', flex: 1
+                        // }
                     ]}
                 >
                     <View style={[styles.dropDownDisplay]}>
@@ -268,7 +267,7 @@ class DropDownPicker extends React.Component {
                     styles.dropDownBox,
                     this.props.dropDownStyle,
                     ! this.state.isVisible && styles.hidden, {
-                        top: this.state.top,
+                        // top: this.state.top,
                         maxHeight: this.props.dropDownMaxHeight,
                         zIndex: this.props.zIndex
                     }
@@ -291,7 +290,7 @@ class DropDownPicker extends React.Component {
                       )
                     }
 
-                    <ScrollView style={{width: '100%'}} nestedScrollEnabled={true} {...scrollViewProps}>
+                    <ScrollView style={{width: '100%'}} nestedScrollEnabled={true}>
                         {items.length > 0 ? items.map((item, index) => (
                             <TouchableOpacity
                                 key={index}
@@ -304,8 +303,7 @@ class DropDownPicker extends React.Component {
                                     alignItems: 'center',
                                     ...(
                                         multiple ? {
-                                            justifyContent: 'space-between',
-                                            ...(this.state.choice.includes(item.value) && this.props.activeItemStyle)
+                                            justifyContent: 'space-between'
                                         } : {
                                             
                                         }
@@ -325,7 +323,7 @@ class DropDownPicker extends React.Component {
                                             marginLeft: 5
                                         })
                                     }]}>
-                                        {item.label.substr(0, this.props.labelLength)}
+                                        {item.label}
                                     </Text>
                                 </View>
                                 {
@@ -377,8 +375,6 @@ DropDownPicker.defaultProps = {
     multipleText: '%d items have been selected',
     min: 0,
     max: 10000000,
-    selectedLabelLength: 1000,
-    labelLength: 1000,
     onOpen: () => {},
     onClose: () => {},
     onChangeItem: () => {},
@@ -389,17 +385,17 @@ DropDownPicker.propTypes = {
     defaultValue: PropTypes.any,
     placeholder: PropTypes.string,
     dropDownMaxHeight: PropTypes.number,
-    style: ViewPropTypes.style,
-    dropDownStyle: ViewPropTypes.style,
-    containerStyle: ViewPropTypes.style,
-    itemStyle: ViewPropTypes.style,
-    labelStyle: Text.propTypes.style,
-    selectedLabelStyle: Text.propTypes.style,
-    placeholderStyle: Text.propTypes.style,
-    activeItemStyle: ViewPropTypes.style,
-    activeLabelStyle: Text.propTypes.style,
+    style: PropTypes.object,
+    dropDownStyle: PropTypes.object,
+    containerStyle: PropTypes.object,
+    itemStyle: PropTypes.object,
+    labelStyle: PropTypes.object,
+    selectedLabelStyle: PropTypes.object,
+    placeholderStyle: PropTypes.object,
+    activeItemStyle: PropTypes.object,
+    activeLabelStyle: PropTypes.object,
     showArrow: PropTypes.bool,
-    arrowStyle: ViewPropTypes.style,
+    arrowStyle: PropTypes.object,
     arrowColor: PropTypes.string,
     arrowSize: PropTypes.number,
     customArrowUp: PropTypes.func,
@@ -410,16 +406,13 @@ DropDownPicker.propTypes = {
     searchable: PropTypes.bool,
     searchablePlaceholder: PropTypes.string,
     searchableError: PropTypes.func,
-    searchableStyle: Text.propTypes.style,
+    searchableStyle: PropTypes.object,
     searchablePlaceholderTextColor: PropTypes.string,
     isVisible: PropTypes.bool,
     multiple: PropTypes.bool,
     multipleText: PropTypes.string,
     min: PropTypes.number,
     max: PropTypes.number,
-    selectedLabelLength: PropTypes.number,
-    labelLength: PropTypes.number,
-    scrollViewProps: PropTypes.object,
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
     onChangeItem: PropTypes.func
@@ -430,6 +423,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        textAlign: 'center',
         paddingVertical: 8,
         borderTopLeftRadius: 0,
         borderBottomLeftRadius: 0,
@@ -444,6 +438,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 5,
         borderWidth: 1,
         borderColor: '#dfdfdf',
+        flexDirection: 'row'
     },
     dropDownDisplay: {
         flexDirection: 'row',
@@ -457,13 +452,14 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'absolute',
+        textAlign: 'center',
+        position: 'relative',
         width: '100%'
     },
     dropDownItem: {
         paddingVertical: 8,
         width: '100%',
-        justifyContent: 'center'
+        // justifyContent: 'center'
     },
     input: {
       flex: 1,
