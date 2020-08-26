@@ -21,6 +21,7 @@ class DropDownPicker extends React.Component {
 
         let choice;
         let items = [];
+        console.log(props, 'samana')
         if (! props.multiple) {
             if (props.defaultValue) {
                 choice = props.items.find(item => item.value === props.defaultValue);
@@ -43,9 +44,9 @@ class DropDownPicker extends React.Component {
 
         this.state = {
             choice: props.multiple ? items : {
-                label: choice.label,
-                value: choice.value,
-                icon: choice.icon
+                label: choice && choice.label,
+                value: choice && choice.value,
+                icon: choice && choice.icon
             },
             searchableText: null,
             isVisible: props.isVisible,
@@ -438,7 +439,7 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 5,
         borderWidth: 1,
         borderColor: '#dfdfdf',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     dropDownDisplay: {
         flexDirection: 'row',
@@ -454,7 +455,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         textAlign: 'center',
         position: 'relative',
-        width: '100%'
+        width: '100%',
     },
     dropDownItem: {
         paddingVertical: 8,
