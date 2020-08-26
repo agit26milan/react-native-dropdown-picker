@@ -24,7 +24,12 @@ class DropDownPicker extends React.Component {
         console.log(props, 'samana')
         if (! props.multiple) {
             if (props.defaultValue) {
-                choice = props.items.find(item => item.value === props.defaultValue);
+                const filter = props.items.find(item => item.value === props.defaultValue);
+                if(filter && filter.length > 0) {
+                    choice = filter
+                } else {
+                    this.null()
+                }
             } else if (props.items.filter(item => item.hasOwnProperty('selected') && item.selected === true).length > 0) {
                 choice = props.items.filter(item => item.hasOwnProperty('selected') && item.selected === true)[0];
             } else {
