@@ -459,11 +459,11 @@ const styles = StyleSheet.create({
     dropDownBox: {
         borderTopLeftRadius: 0,
         borderTopRightRadius: 0,
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
         textAlign: 'center',
         position: 'relative',
-        width: '100%',
+        width: '100%'
     },
     dropDownItem: {
         paddingVertical: 8,
