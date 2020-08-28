@@ -22,7 +22,7 @@ class DropDownPicker extends React.Component {
         let choice;
         let items = [];
         if (! props.multiple) {
-            if (props.defaultValue) {
+            if (props.defaultValue && props.defaultValue !== '') {
                 if(props.items && props.items.length > 0) {
                     const filter = props.items.find(item => item.value === props.defaultValue);
                     if(filter && Object.keys(filter).length > 0) {
