@@ -276,7 +276,7 @@ class DropDownPicker extends React.Component {
                     styles.dropDownBox,
                     this.props.dropDownStyle,
                     ! this.state.isVisible && styles.hidden, {
-                        // top: this.state.top,
+                        top: this.state.top,
                         maxHeight: this.props.dropDownMaxHeight,
                         zIndex: this.props.zIndex
                     }
@@ -299,7 +299,7 @@ class DropDownPicker extends React.Component {
                       )
                     }
 
-                    <ScrollView style={{width: '100%'}} nestedScrollEnabled={true}>
+                    <ScrollView style={{width: '100%', zIndex: 1000}} nestedScrollEnabled={true}>
                         {items.length > 0 ? items.map((item, index) => (
                             <TouchableOpacity
                                 key={index}
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         textAlign: 'center',
-        position: 'relative',
+        position: 'absolute',
         width: '100%'
     },
     dropDownItem: {
