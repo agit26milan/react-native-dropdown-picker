@@ -248,7 +248,7 @@ class DropDownPicker extends React.Component {
                         {this.state.choice.icon && ! multiple && this.state.choice.icon()}
                         <Text style={[
                             this.props.labelStyle,
-                            placeholderStyle, {opacity, flex: 1, marginRight: 5},
+                            placeholderStyle, {opacity, flex: 1, marginLeft: 10},
                             this.state.choice.label !== null && this.props.selectedLabelStyle,
                             this.state.choice.icon && {marginLeft: 5}
                         ]}>
@@ -281,9 +281,11 @@ class DropDownPicker extends React.Component {
                         zIndex: this.props.zIndex
                     }
                 ]}>
+                  
+
+                    <ScrollView stickyHeaderIndices={this.props.searchable ? [0] : null} style={{width: '100%'}} nestedScrollEnabled={true}>
                     {
                       this.props.searchable && (
-                        <View style={{width: '100%', flexDirection: 'row'}}>
                             <TextInput
                                 style={[styles.input, this.props.searchableStyle]}
                                 defaultValue={this.state.searchableText}
@@ -295,11 +297,9 @@ class DropDownPicker extends React.Component {
                                     })
                                 }}
                             />
-                        </View>
                       )
                     }
-
-                    <ScrollView style={{width: '100%', zIndex: 1000}} nestedScrollEnabled={true}>
+                        <View style={{paddingHorizontal: 10}} >
                         {items.length > 0 ? items.map((item, index) => (
                             <TouchableOpacity
                                 key={index}
@@ -346,6 +346,8 @@ class DropDownPicker extends React.Component {
                                 {this.props.searchableError()}
                             </View>
                         )}
+                        </View>
+                        
                     </ScrollView>
                 </View>
             </View>
@@ -438,8 +440,8 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 0,
     },
     dropDown: {
-        paddingHorizontal: 10,
-        paddingVertical: 5,
+        // paddingHorizontal: 10,
+        // paddingVertical: 5,
         backgroundColor: '#fff',
         borderTopRightRadius: 5,
         borderTopLeftRadius: 5,
@@ -471,12 +473,14 @@ const styles = StyleSheet.create({
         // justifyContent: 'center'
     },
     input: {
-      flex: 1,
       borderColor: '#dfdfdf',
-      borderBottomWidth: 1,
+      borderWidth: 1,
       paddingHorizontal: 0,
-      paddingVertical: 8,
+      paddingVertical: 0,
       marginBottom: 10,
+      backgroundColor: 'white',
+      borderRadius: 0,
+      width: '100%'
     },
     hidden: {
         position: 'relative',
