@@ -7,7 +7,6 @@ import {
     ScrollView,
     Platform,
     TextInput,
-    FlatList
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -227,7 +226,7 @@ class DropDownPicker extends React.Component {
             <View style={[this.props.containerStyle, {
 
                     ...(Platform.OS !== 'android' && {
-                        zIndex: this.props.zIndex
+                        // zIndex: this.props.zIndex
                     })
 
             }]}>
@@ -276,7 +275,7 @@ class DropDownPicker extends React.Component {
                     styles.dropDownBox,
                     this.props.dropDownStyle,
                     ! this.state.isVisible && styles.hidden, {
-                        top: this.state.top,
+                        // top: this.state.top,
                         maxHeight: this.props.dropDownMaxHeight,
                         zIndex: this.props.zIndex
                     }
@@ -287,7 +286,7 @@ class DropDownPicker extends React.Component {
                     {
                       this.props.searchable && (
                             <TextInput
-                                style={[styles.input, this.props.searchableStyle]}
+                                style={[styles.input,Platform.OS === 'ios' && {height: 35} , this.props.searchableStyle]}
                                 defaultValue={this.state.searchableText}
                                 placeholder={this.props.searchablePlaceholder}
                                 placeholderTextColor={this.props.searchablePlaceholderTextColor}
@@ -464,7 +463,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'flex-start',
         textAlign: 'center',
-        position: 'absolute',
+        position: 'relative' ,
         width: '100%'
     },
     dropDownItem: {
