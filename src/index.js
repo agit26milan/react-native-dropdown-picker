@@ -299,7 +299,7 @@ class DropDownPicker extends React.Component {
                       )
                     }
                         <View style={{paddingHorizontal: 10}} >
-                        {items.length > 0 ? items.map((item, index) => (
+                        {items && items.length > 0 ? items.map((item, index) => (
                             <TouchableOpacity
                                 key={index}
                                 onPress={() => this.select(item, index)}
