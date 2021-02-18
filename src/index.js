@@ -65,68 +65,68 @@ class DropDownPicker extends React.Component {
         };
     }
 
-    static getDerivedStateFromProps(props, state) {
-        // Change default value (! multiple)
-        if (! state.props.multiple && props.defaultValue !== state.props.defaultValue) {
-            const { label, value, icon } = props.defaultValue === null ? {
-                label: null,
-                value: null,
-                icon: () => {}
-            } : props.items.find(item => item.value === props.defaultValue);
-            return {
-                choice: {
-                    label, value, icon
-                },
-                props: {
-                    ...state.props,
-                    defaultValue: props.defaultValue
-                }
-            }
-        }
+    // static getDerivedStateFromProps(props, state) {
+    //     // Change default value (! multiple)
+    //     if (! state.props.multiple && props.defaultValue !== state.props.defaultValue) {
+    //         const { label, value, icon } = props.defaultValue === null ? {
+    //             label: null,
+    //             value: null,
+    //             icon: () => {}
+    //         } : props.items.find(item => item.value === props.defaultValue);
+    //         return {
+    //             choice: {
+    //                 label, value, icon
+    //             },
+    //             props: {
+    //                 ...state.props,
+    //                 defaultValue: props.defaultValue
+    //             }
+    //         }
+    //     }
 
-        // Change default value (multiple)
-        if (state.props.multiple && JSON.stringify(props.defaultValue) !== JSON.stringify(state.props.defaultValue)) {
-            let items = [];
-            if (props.defaultValue && Array.isArray(props.defaultValue) && props.defaultValue.length > 0) {
-                props.defaultValue.forEach((value, index) => {
-                    items.push(
-                        props.items.find(item => item.value === value)
-                    )
-                });
-            }
+    //     // Change default value (multiple)
+    //     if (state.props.multiple && JSON.stringify(props.defaultValue) !== JSON.stringify(state.props.defaultValue)) {
+    //         let items = [];
+    //         if (props.defaultValue && Array.isArray(props.defaultValue) && props.defaultValue.length > 0) {
+    //             props.defaultValue.forEach((value, index) => {
+    //                 items.push(
+    //                     props.items.find(item => item.value === value)
+    //                 )
+    //             });
+    //         }
 
-            return {
-               choice: items,
-               props: {
-                   ...state.props,
-                   defaultValue: props.defaultValue
-               } 
-            }
-        }
+    //         return {
+    //            choice: items,
+    //            props: {
+    //                ...state.props,
+    //                defaultValue: props.defaultValue
+    //            } 
+    //         }
+    //     }
 
-        // Change visibility
-        if (props.isVisible !== state.props.isVisible) {
-            return {
-                isVisible: props.isVisible,
-                props: {
-                    ...state.props,
-                    isVisible: props.isVisible
-                }
-            }
-        }
+    //     // Change visibility
+    //     if (props.isVisible !== state.props.isVisible) {
+    //         return {
+    //             isVisible: props.isVisible,
+    //             props: {
+    //                 ...state.props,
+    //                 isVisible: props.isVisible
+    //             }
+    //         }
+    //     }
 
-        // Change disability
-        if (props.disabled !== state.props.disabled) {
-            return {
-                props: {
-                    ...state.props,
-                    disabled: props.disabled
-                }
-            }
-        }
+    //     // Change disability
+    //     if (props.disabled !== state.props.disabled) {
+    //         return {
+    //             props: {
+    //                 ...state.props,
+    //                 disabled: props.disabled
+    //             }
+    //         }
+    //     }
 
-        return null;
-    }
+    //     return null;
+    // }
 
     null() {
         return {
